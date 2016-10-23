@@ -1,19 +1,19 @@
 import React from 'react';
-import {hashHistory} from 'react-router';
-import store from '../store';
+import { hashHistory } from 'react-router';
+// import store from '../store';
 
 export default React.createClass({
   getInitialState: function(){
     return {};
   },
   updateState: function () {
-    this.setState(store.session.toJSON());
+    this.setState(session.toJSON());
   },
   componentDidMount: function () {
-    store.session.on('change', this.updateState);
+    session.on('change', this.updateState);
   },
   componentWillUnmount: function () {
-    store.session.off('change', this.updateState);
+    session.off('change', this.updateState);
   },
   submitHandler: function(e) {
     e.preventDefault();
@@ -21,7 +21,7 @@ export default React.createClass({
       .reduce( (a, b) => { a[b] = this.refs[b].value;
         return a;
       }, {})
-      store.session.signup(data);
+      session.signup(data);
   },
   shouldComponentUpdate: function (nextProps, nextState) {
     if (nextState.authtoken){
